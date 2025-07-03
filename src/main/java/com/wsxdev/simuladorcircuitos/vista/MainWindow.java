@@ -8,6 +8,7 @@ import java.awt.event.*;
 
 import com.wsxdev.simuladorcircuitos.vista.PanelCircuito;
 import com.wsxdev.simuladorcircuitos.controlador.CircuitoControlador;
+import com.wsxdev.simuladorcircuitos.persistencia.Circuitos;
 
 
 public class MainWindow extends javax.swing.JFrame {
@@ -34,6 +35,7 @@ public class MainWindow extends javax.swing.JFrame {
         // setResizable(false);
         pack();
         panelCircuito = new PanelCircuito();
+        btnNuevo.addActionListener(e -> cargarCircuito());
         panelCircuito.setBounds(220, 0, getWidth() - 220, getHeight());
         getContentPane().add(panelCircuito);
         setLocationRelativeTo(null);
@@ -77,7 +79,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-
         menuLateral.add(btnInicio);
         menuLateral.add(btnNuevo);
         menuLateral.add(btnAgregar);
@@ -92,7 +93,40 @@ public class MainWindow extends javax.swing.JFrame {
         panelCentral.setBackground(Color.WHITE);
         panelCentral.setLayout(null); // Para control absoluto
         add(panelCentral, BorderLayout.CENTER);
-    }  // </editor-fold>//GEN-END:initComponents
+    }
+    
+    // </editor-fold>//GEN-END:initComponents
+
+    private void cargarCircuito() {
+        Circuitos persistencia = new Circuitos();
+        java.util.List<com.wsxdev.simuladorcircuitos.modelo.Circuito> circuitosGuardados = persistencia.cargarTodos();
+
+        if (circuitosGuardados.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay circuitos guardados.");
+            return;
+        }
+
+        String[] nombres = circuitosGuardados.stream()
+                            .map(com.wsxdev.simuladorcircuitos.modelo.Circuito::getNombre)
+                            .toArray(String[]::new);
+
+        String seleccionado = (String) JOptionPane.showInputDialog(this, "Selecciona un circuito",
+                "Cargar circuito", JOptionPane.PLAIN_MESSAGE, null, nombres, nombres[0]);
+
+        if (seleccionado != null) {
+            com.wsxdev.simuladorcircuitos.modelo.Circuito circuitoCargado = circuitosGuardados.stream()
+                .filter(c -> c.getNombre().equals(seleccionado))
+                .findFirst()
+                .orElse(null);
+
+            if (circuitoCargado != null) {
+                panelCircuito.cargarComponentesDesdeModelo(circuitoCargado);
+                JOptionPane.showMessageDialog(this, "Circuito cargado correctamente.");
+            }
+        }
+    }
+
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new MainWindow().setVisible(true));

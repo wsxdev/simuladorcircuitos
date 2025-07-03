@@ -188,4 +188,17 @@ public class PanelCircuito extends JPanel {
         return new com.wsxdev.simuladorcircuitos.modelo.Circuito(lista);
     }
 
+    public void cargarComponentesDesdeModelo(com.wsxdev.simuladorcircuitos.modelo.Circuito circuito) {
+        componentes.clear();
+        for (com.wsxdev.simuladorcircuitos.modelo.Componente c : circuito.getComponentes()) {
+            // Asumiendo que Componente tiene getTipo(), getX(), getY(), getAngulo()
+            ComponenteVisual cv = new ComponenteVisual(c.getTipo(), c.getX(), c.getY(), 48, 48);
+            cv.angulo = c.getAngulo();  // Si tienes ese getter
+            componentes.add(cv);
+        }
+        repaint();
+    }
+
+
+
 }
