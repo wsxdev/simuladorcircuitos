@@ -1,0 +1,15 @@
+# Archivos de IDE
+.vscode/
+.idea/
+
+# Carpetas de compilación
+/build
+/dist/
+/output/
+/target/
+.dat
+
+# Logs y cachés
+.log
+.temp
+.cache/
