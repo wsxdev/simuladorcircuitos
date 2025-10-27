@@ -91,7 +91,7 @@ public class MainWindow extends javax.swing.JFrame {
         // Panel Central (área de dibujo o contenido dinámico)
         panelCentral = new JPanel();
         panelCentral.setBackground(Color.WHITE);
-        panelCentral.setLayout(null); // Para control absoluto
+        panelCentral.setLayout(null);
         add(panelCentral, BorderLayout.CENTER);
     }
     

@@ -17,7 +17,7 @@ public class PanelCircuito extends JPanel {
 
     public PanelCircuito() {
         setBackground(Color.WHITE);
-        setLayout(null); // Posicionamiento absoluto
+        setLayout(null);
         componentes = new ArrayList<>();
         menuComponentes = crearMenuContextual();
 
@@ -29,7 +29,7 @@ public class PanelCircuito extends JPanel {
                     for (ComponenteVisual c : componentes) {
                         if (c.contiene(e.getX(), e.getY())) {
                             componenteArrastrado = c;
-                            componenteSeleccionado = c; // NUEVO
+                            componenteSeleccionado = c;
                             offsetX = e.getX() - c.x;
                             offsetY = e.getY() - c.y;
                             requestFocusInWindow();
@@ -58,7 +58,7 @@ public class PanelCircuito extends JPanel {
             }
         });
 
-        setFocusable(true); // Necesario para eventos de teclado
+        setFocusable(true);
         requestFocusInWindow();
 
         addKeyListener(new KeyAdapter() {
@@ -80,7 +80,7 @@ public class PanelCircuito extends JPanel {
         lastClickX = e.getX();
         lastClickY = e.getY();
         menuComponentes.show(e.getComponent(), lastClickX, lastClickY);
-        requestFocusInWindow(); // Para que pueda detectar tecla R
+        requestFocusInWindow();
     }
 
     private JPopupMenu crearMenuContextual() {
@@ -94,7 +94,7 @@ public class PanelCircuito extends JPanel {
                 repaint();
             }
         });
-        menu.addSeparator(); // Separador visual
+        menu.addSeparator();
         menu.add(eliminar);
 
         JMenuItem fuente = new JMenuItem("Fuente de Voltaje");

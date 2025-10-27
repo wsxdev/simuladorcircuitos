@@ -16,9 +16,9 @@ public class Circuito implements Serializable {
         this.componentes = new ArrayList<>();
     }
 
-    // ✅ NUEVO CONSTRUCTOR: el que necesita PanelCircuito
+    // NUEVO CONSTRUCTOR: el que necesita PanelCircuito
     public Circuito(List<Componente> componentes) {
-        this.nombre = "CircuitoSinNombre"; // o puedes dejarlo null
+        this.nombre = "CircuitoSinNombre";
         this.componentes = componentes;
     }
 
